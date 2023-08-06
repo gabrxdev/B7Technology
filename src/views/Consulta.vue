@@ -11,13 +11,15 @@
             <div class="input-area">
                 <div class="input-consulta">
                     <span class="material-symbols-rounded">data_loss_prevention</span>
-                    <input :maxlength="maxLenght" :disabled="disabled" :type="type" :placeholder="placeholder">
+                    <input v-model="inputConsulta" :maxlength="maxLenght" :disabled="disabled" :type="type"
+                        :placeholder="placeholder">
                     <button>Consultar</button>
                 </div>
                 <div class="selection-area">
                     <div @click="toggle()" class="select-area">
                         <span id="input">{{ spanContent }}</span>
-                        <span class="[material-symbols-rounded, {'arrow-up': show, 'arrow-down': !show}]">expand_more</span>
+                        <span
+                            :class="['material-symbols-rounded', { 'arrow-up': show, 'arrow-down': !show }]">expand_more</span>
                     </div>
                     <div v-show="show" class="opcoes">
                         <span @click="nome">Nome completo</span>
@@ -38,12 +40,14 @@ const spanContent = ref('Selecione uma opção')
 const disabled = ref(true)
 const type = ref('text')
 const maxLenght = ref(40)
+const inputConsulta = ref('')
 const nome = () => {
     spanContent.value = 'Nome completo'
     show.value = false
     placeholder.value = 'Digite o nome completo'
     disabled.value = false
     maxLenght.value = 40
+    inputConsulta.value = ''
 }
 const cpf = () => {
     spanContent.value = 'Cadastro de Pessoa Física (CPF)'
@@ -51,6 +55,7 @@ const cpf = () => {
     placeholder.value = 'Digite o número do CPF'
     disabled.value = false
     maxLenght.value = 11
+    inputConsulta.value = ''
 }
 const numero = () => {
     spanContent.value = 'Número de celular'
@@ -58,13 +63,11 @@ const numero = () => {
     placeholder.value = 'Digite o número do celular'
     disabled.value = false
     maxLenght.value = 11
+    inputConsulta.value = ''
 }
 
 const show = ref(false)
 const toggle = () => (show.value = !show.value)
-const rotateDeg = 180
-const rotateNormal = 0
-const rotate = computed(() => `${show.value ? rotateDeg : rotateNormal}deg`)
 </script>
 
 <style scoped>
@@ -159,6 +162,7 @@ section {
     position: absolute;
     bottom: 0.6em;
     left: 0.6em;
+    transition: all ease-in 0.2s;
 }
 
 .select-area {
