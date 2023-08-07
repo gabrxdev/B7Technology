@@ -1,10 +1,13 @@
 <template>
     <nav :style="{ width: expandNav }">
-        <img @click="nav" src="../assets/images/bloco7Purple.jpg">
         <div class="links">
             <router-link :style="{ width: expandDiv }" v-for="link in links" :key="link" :to="link.path" :id="link.id"><span
                     class="material-symbols-rounded">{{
                         link.icone }}</span>{{ link.content }}</router-link>
+        </div>
+        <span @click="nav" :class="['material-symbols-rounded', { 'arrow-up': isExpanded, 'arrow-down': !isExpanded }]" id="open-nav">keyboard_arrow_right</span>
+        <div class="imagem-container">
+            <img src="../assets/images/bloco7Purple.jpg">
         </div>
     </nav>
 </template>
@@ -36,7 +39,7 @@ const divShrink = 2.5
 <style scoped lang="scss">
 :root {
     --body-color: #18191A;
-    --navbar-color: #242526;
+    --navbar-color: #212121;
     --hover-color: #3A3B3C;
     --text-color: #CCC;
 }
@@ -53,6 +56,9 @@ nav {
     margin-left: 2em;
     margin-top: 1em;
     overflow: hidden;
+    justify-content: space-between;
+    padding: 1em 0em;
+    position: relative;
 }
 
 nav img {
@@ -101,10 +107,25 @@ a.router-link-active {
         font-variation-settings: 'FILL' 1;
     }
 }
-
-#sair {
+#open-nav{
+    font-size: 30px;
+    color: #FFF;
+    background-color: #7D2AE8;
+    border-radius: 20px;
+    width: 30px;
     position: absolute;
-    bottom: 4em;
-    overflow: hidden;
+    bottom: 3em;
+    left: 0.8em;
+    cursor: pointer;
+}
+span{
+    transition: all linear 0.1s;
+}
+.arrow-up {
+    transform: rotate(180deg)
+}
+
+.arrow-down {
+    transform: rotate(0deg)
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <main>
-        <Navbar />
+        <NewNav />
 
         <section>
             <div class="header">
@@ -19,7 +19,7 @@
                     <div @click="toggle()" class="select-area">
                         <span id="input">{{ spanContent }}</span>
                         <span
-                            :class="['material-symbols-rounded', { 'arrow-up': show, 'arrow-down': !show }]">expand_more</span>
+                           :class="['material-symbols-rounded', { 'arrow-up': show, 'arrow-down': !show }]">arrow_drop_down</span>
                     </div>
                     <div v-show="show" class="opcoes">
                         <span @click="nome">Nome completo</span>
@@ -33,9 +33,9 @@
 </template>
 
 <script setup>
-import Navbar from '../components/Navbar.vue'
+import NewNav from '../components/NewNav.vue'
 import { ref, computed } from 'vue'
-const placeholder = ref('Digite os dados')
+const placeholder = ref('Selecione uma forma de consulta')
 const spanContent = ref('Selecione uma opção')
 const disabled = ref(true)
 const type = ref('text')
@@ -73,7 +73,7 @@ const toggle = () => (show.value = !show.value)
 <style scoped>
 :root {
     --body-color: #18191A;
-    --navbar-color: #242526;
+    --navbar-color: #212121;
     --hover-color: #3A3B3C;
     --text-color: #CCC;
 }
@@ -87,12 +87,13 @@ main {
 
 section {
     position: relative;
-    margin: 0 auto;
     width: 30em;
     display: flex;
     flex-direction: column;
     padding: 1em;
     gap: 1em;
+    margin: 0 auto;
+    margin-top: 5em;
 }
 
 .header {
@@ -207,7 +208,9 @@ section {
     border-radius: 6px;
     transition: 0.2s ease-in all;
 }
-
+.selection-area span{
+    transition: all linear 0.1s;
+}
 .opcoes span:hover {
     background-color: var(--hover-color);
     cursor: pointer;
