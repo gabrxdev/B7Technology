@@ -1,14 +1,11 @@
 <template>
   <nav class="navigation">
     <div class="logo-container">
-      <img src="../assets/images/bloco7Purple.jpg" alt="">
-      <div class="usuario">
-        <h4>Gabriel R.</h4>
-      </div>
+      <h2>B7Technology</h2>
     </div>
 
     <div class="links-container">
-      <router-link :to="item.path"  v-for="item in items" :key="item"><span class="material-symbols-rounded">{{ item.icon }}</span>{{ item.conteudo }}</router-link>
+      <router-link :id="item.id" :to="item.path"  v-for="item in items" :key="item"><span class="material-symbols-rounded">{{ item.icon }}</span>{{ item.conteudo }}</router-link>
     </div>
     <div class="button-container">
         <button><span class="material-symbols-rounded">logout</span>Logout</button>
@@ -20,10 +17,10 @@
 import { ref } from 'vue'
 
 const items = ref([
-  {conteudo: 'Dashboard', path: '/dashboard'},
-  {conteudo: 'Consulta', path: '/consulta'},
-  {conteudo: 'Usuários', path: '/usuarios'},
-  {conteudo: 'Configurações', path: '/configuracoes'}
+  {conteudo: 'Dashboard', path: '/dashboard', id: 'dashboard'},
+  {conteudo: 'Consulta', path: '/consulta', id: 'consulta'},
+  {conteudo: 'Usuários', path: '/usuarios', id: 'usuarios'},
+  {conteudo: 'Configurações', path: '/configuracoes', id: 'config'}
 
 ])
 </script>
@@ -45,27 +42,18 @@ nav {
   height: 40px;
   align-items: center;
   justify-content: center;
-  padding: 25px;
+  padding-top: 25px;
   position: absolute;
-  right: -4em;
 }
 
 .logo-container {
   font-family: 'Inter';
-  font-size: 20px;
-  color: #404040;
-  position: absolute;
-  left: 5em;
-  display: flex;
-  gap: 0.5em
+  margin-right: 3rem;
 }
 
-.logo-container img{
-  width: 2em;
-  border-radius: 5px;
-}
 
-.logo-container h4{
+
+.logo-container h2{
   font-size: 15px;
   color: #CCC;
 }
@@ -124,5 +112,25 @@ a.router-link-active{
 }
 h2{
   color: #CCC;
+}
+@media screen and (max-width: 768px){
+  #config{
+    display: none;
+  }
+  #usuarios{
+    display: none;
+  }
+  .logo-container{
+    display: none;
+  }
+  .links-container{
+    gap: 5px;
+  }
+  a{
+    padding: 5px 5px;
+  }
+  button{
+    left: 2em
+  }
 }
 </style>

@@ -88,14 +88,31 @@ section {
     .card-section{
         display: flex;
         flex-direction: column;
-        margin-left: 20rem;
+        margin-left: 5rem;
         position: relative;
-        top: 15rem;
-        
+        top: 10rem;
+    }
+    .card-boas-vindas{
+        margin-left: -1rem;
+        position: relative;
+        top: 10rem;
+        width: 20rem;
+    }
+    .card-boas-vindas h1{
+        font-size: 25px;
+        margin-top: 2rem;
+    }
+    .card-boas-vindas p{
+        font-size: 15px;
+        margin-bottom: 2rem;
     }
     main{
         display: flex;
         flex-direction: column;
+        height: 40rem;
+    }
+    img{
+        display: none;
     }
 }
 </style>

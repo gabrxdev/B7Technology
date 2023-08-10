@@ -11,7 +11,6 @@
         <input :class="item.class" :type="item.type" :placeholder="item.phd">
         <span class="material-symbols-rounded">{{ item.icon }}</span>
       </div>
-      <span >Credenciais erradas!</span>
       <button >Entrar</button>
     </div>
 
@@ -115,5 +114,10 @@ span {
 .b7technology p {
   font-size: 25px;
   font-weight: 600;
+}
+@media screen and (max-width: 768px) {
+  main{
+    flex-direction: column;
+  }
 }
 </style>

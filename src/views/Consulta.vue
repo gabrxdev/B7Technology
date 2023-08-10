@@ -395,4 +395,38 @@ section {
     right: 0.5em;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px){
+    .input-area{
+        width: 23rem;
+    }
+    .input-area input{
+        width: 20em
+    }
+    .select-area{
+        width: 23rem;
+        position: absolute;
+        left: 1rem
+    }
+    .opcoes{
+        margin-top: 4rem;
+        width: 20rem;
+        position: relative;
+        right: 1.5rem
+    }
+    .resultado-area{
+        width: 23rem;
+        position: relative;
+        left: 0rem;
+        display: flex;
+        flex-direction: column;
+        height: 15rem;
+        margin-top: 2.5rem;
+        gap: 0px;
+    }
+    .modal{
+        top: 10rem;
+        left: 0px;
+    }
+}
 </style>
