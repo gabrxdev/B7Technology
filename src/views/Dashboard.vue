@@ -84,5 +84,18 @@ section {
     justify-content: center;
     margin-top: 26px;
 }
-
+@media screen and (max-width: 768px) {
+    .card-section{
+        display: flex;
+        flex-direction: column;
+        margin-left: 20rem;
+        position: relative;
+        top: 15rem;
+        
+    }
+    main{
+        display: flex;
+        flex-direction: column;
+    }
+}
 </style>
