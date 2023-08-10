@@ -1,11 +1,14 @@
 <template>
   <nav class="navigation">
     <div class="logo-container">
-      <h2>B7 Technology</h2>
+      <img src="../assets/images/bloco7Purple.jpg" alt="">
+      <div class="usuario">
+        <h4>Gabriel R.</h4>
+      </div>
     </div>
 
     <div class="links-container">
-      <router-link :to="item.path"  v-for="item in items" :key="item">{{ item.conteudo }}</router-link>
+      <router-link :to="item.path"  v-for="item in items" :key="item"><span class="material-symbols-rounded">{{ item.icon }}</span>{{ item.conteudo }}</router-link>
     </div>
     <div class="button-container">
         <button><span class="material-symbols-rounded">logout</span>Logout</button>
@@ -44,7 +47,7 @@ nav {
   justify-content: center;
   padding: 25px;
   position: absolute;
-  right: 0em;
+  right: -4em;
 }
 
 .logo-container {
@@ -52,9 +55,20 @@ nav {
   font-size: 20px;
   color: #404040;
   position: absolute;
-  left: 3em;
+  left: 5em;
+  display: flex;
+  gap: 0.5em
 }
 
+.logo-container img{
+  width: 2em;
+  border-radius: 5px;
+}
+
+.logo-container h4{
+  font-size: 15px;
+  color: #CCC;
+}
 button {
   padding: 8px 15px;
   border: none;
@@ -67,22 +81,15 @@ button {
   letter-spacing: 1px;
   font-family: 'Inter';
   background-color: #121816;
-  color: #49FA90;
+  color: #b187e8;
   transition: 0.3s all ease-in;
   position: relative;
-  left: 10em;
+  left: 3em;
   bottom: 0em
 }
 
 button:hover {
   color: #FFF;
-}
-
-.material-symbols-rounded {
-  font-variation-settings: 'FILL' 1,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 48;
 }
 
 .links-container {
@@ -100,6 +107,9 @@ a {
   color: #CCC;
   font-weight: 500;
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
 }
 
 a:hover {

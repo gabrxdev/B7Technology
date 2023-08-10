@@ -13,7 +13,7 @@
                     <span class="material-symbols-rounded">data_loss_prevention</span>
                     <input v-model="inputConsulta" :maxlength="maxLenght" :disabled="disabled" :type="type"
                         :placeholder="placeholder">
-                    <button>Consultar</button>
+                    <button @click="resultadoFunc">Consultar</button>
                 </div>
                 <div class="selection-area">
                     <div @click="toggle()" class="select-area">
@@ -28,19 +28,73 @@
                     </div>
                 </div>
             </div>
+
+            <div v-show="resultado" v-for="dados in dadosConsulta" :key="dados" class="resultado-area">
+                <div class="nome-container">
+                    <h4>Nome</h4>
+                    <p>{{ dados.nome }}</p>
+                </div>
+
+                <div class="cpf-container">
+                    <h4>CPF</h4>
+                    <p>{{ dados.cpf }}</p>
+                </div>
+
+                <div class="nascimento-container">
+                    <h4>Nascimento</h4>
+                    <p>{{ dados.nascimento }}</p>
+                </div>
+                <button @click="openModal" class="openModal">Abrir</button>
+            </div>
+
         </section>
+
+        <div v-show="showModal" class="modal">
+            <span @click="closeModal" id="close" class="material-symbols-rounded">close</span>
+
+            <h3>Resultados</h3>
+            <p class="conteudo" v-for="dados in dadosConsulta" :key="dados">Nome: <strong>{{ dados.nome }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">CPF: <strong>{{ dados.cpf }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Nascimento: <strong>{{ dados.nascimento }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Sexo: <strong>{{ dados.sexo }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Status receita federal: <strong>{{ dados.statusReceita }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Óbito: <strong>{{ dados.obito }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Nacionalidade: <strong>{{ dados.nacionalidade }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Nome da Mãe: <strong>{{ dados.nomeMae }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Escolaridade: <strong>{{ dados.escolaridade }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Profissão: <strong>{{ dados.profissao }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Renda: <strong>{{ dados.renda }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Telefone: <strong>{{ dados.telefone }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Logradouro: <strong>{{ dados.logradouro }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Número: <strong>{{ dados.numero }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Complemento: <strong>{{ dados.complemento }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Bairro: <strong>{{ dados.bairro }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">Cidade: <strong>{{ dados.cidade }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">CEP: <strong>{{ dados.cep }}</strong></p>
+            <p v-for="dados in dadosConsulta" :key="dados">CPNJ: <strong>{{ dados.cpnj }}</strong></p>
+            <div class="acoes">
+                <span @click="copiarConteudo" class="material-symbols-rounded">content_copy</span>
+                <span class="material-symbols-rounded">picture_as_pdf</span>
+                <span class="material-symbols-rounded">screenshot_monitor</span>
+            </div>
+        </div>
+        <div v-if="showModal" class="overlay">
+
+        </div>
     </main>
 </template>
 
 <script setup>
 import NewNav from '../components/NewNav.vue'
 import { ref, computed } from 'vue'
+
 const placeholder = ref('Selecione uma forma de consulta')
 const spanContent = ref('Selecione uma opção')
 const disabled = ref(true)
 const type = ref('text')
 const maxLenght = ref(40)
 const inputConsulta = ref('')
+
 const nome = () => {
     spanContent.value = 'Nome completo'
     show.value = false
@@ -66,8 +120,43 @@ const numero = () => {
     inputConsulta.value = ''
 }
 
+const dadosConsulta = ref([
+    { nome: 'Francisco Fabiano Bessa Filho', 
+    cpf: '00791329445', 
+    nascimento: '27/03/1985',
+    sexo: 'M',
+    statusReceita: 'Regular',
+    obito: 'Não',
+    nacionalidade: 'Brasileiro',
+    nomeMae: 'Sandra Sueli Bezarra Tavares',
+    cpfMae: '32674120487',
+    escolaridade: 'Superior completo',
+    profissao: 'Diretor geral de empresa',
+    renda: 'R$ 7.888 / R$ 15.7600',
+    telefone: '83988183127',
+    logradouro: 'Rua olegario mariano',
+    numero: '371',
+    complemento: 'Não consta',    
+    bairro: 'Catole',
+    cidade: 'Campina grande - PB',
+    cep: '58410124',
+    cpnj: '01934957000178',
+ }
+])
 const show = ref(false)
 const toggle = () => (show.value = !show.value)
+
+const resultado = ref(false)
+function resultadoFunc(){
+    resultado.value = true
+}
+
+// Modal
+const showModal = ref(false)
+const closeModal = ()=> (showModal.value = !showModal.value)
+const openModal = ()=> (showModal.value = !showModal.value)
+
+const conteudo = document.querySelector('.conteudo')
 </script>
 
 <style scoped>
@@ -222,5 +311,88 @@ section {
 
 .arrow-down {
     transform: rotate(0deg)
+}
+
+.resultado-area{
+    color: #CCC;
+    display: flex;
+    gap: 3em;
+    justify-content: space-between;
+    padding: 0.6em 0.8em;
+    background-color: var(--navbar-color);
+    border-radius: 6px;
+    cursor: pointer;
+    width: 40em;
+    position: relative;
+    right: 5em;
+}
+.resultado-area button{
+    padding: 1em 2em;
+    border-radius: 6px;
+    background-color: #7D2AE8;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+}
+.nome-container, .cpf-container, .nascimento-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.resultado-area p{
+    font-size: 11px;
+    color: #b187e8;
+    font-weight: 600;
+}
+.resultado-area h4{
+    font-size: 14px;
+}
+
+.modal{
+    background-color: var(--navbar-color);
+    position: absolute;
+    left: 30em;
+    bottom: 10em;
+    height: 25em;
+    width:25em;
+    padding: 1em 2em;
+    color: #CCC;
+    border-radius: 6px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+.modal p{
+    font-size: 12px;
+    font-weight: 600;
+}
+.modal strong{
+    color: #8a43e7;
+}
+
+.overlay{
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.acoes{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.acoes span{
+    background-color: var(--hover-color);
+    padding: 0.5em 0.5em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#close{
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    cursor: pointer;
 }
 </style>
